@@ -1,0 +1,40 @@
+Delivered-To: test2_isa@centrum.sk
+Received: from gmmr-3.centrum.cz (unknown [10.255.254.21])
+	by gmmr2.centrum.cz (Postfix) with ESMTP id 81CDF6004778
+	for <test2_isa@centrum.sk>; Sun, 17 Oct 2021 19:06:26 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=centrum.sk; s=mail;
+	t=1634490386; bh=vyC5x6ppbEz685MDpAudQn6KhYlXK5ClAeCoCNDECeg=;
+	h=To:Subject:Date:From:From;
+	b=K5mmzIYAUCXLgdAroi7/Fi5/FMrAtk2m93pE8+JRkIgewBfte5kmOQQHKqoXvHFYG
+	 J9dQOfbjbMvoua/8xAnMoaSkNsgPwHo+Dn4S8I9TGOCTwhfAe0WZtqKTHAXMdVF7GB
+	 gCFowgmH5zGevCMXI20I2O2fFQAafz3qch3QVARU=
+Received: from vm2.excello.cz (vm2.excello.cz [IPv6:2001:67c:15a0:4000::b])
+	by gmmr-3.centrum.cz (Postfix) with QMQP id 803C310002DA7
+	for <test2_isa@centrum.sk>; Sun, 17 Oct 2021 19:06:26 +0200 (CEST)
+Received: from vm2.excello.cz by vm2.excello.cz
+ (VF-Scanner: Clear:RC:0(2a00:da80:1:502::7):SC:0(0.7/5.0):CC:0:;
+ processed in 0.2 s); 17 Oct 2021 17:06:26 +0000
+X-VF-Scanner-ID: 20211017170626.330617.24043.vm2.excello.cz.0
+X-Spam-Status: No, hits=0.7, required=5.0
+Received: from gmmr-2.centrum.cz (2a00:da80:1:502::7)
+  by out1.virusfree.cz with ESMTPS (TLSv1.3, TLS_AES_256_GCM_SHA384); 17 Oct 2021 19:06:26 +0200
+Received: from mail1012.cent (unknown [10.255.254.22])
+	by gmmr-2.centrum.cz (Postfix) with ESMTP id 496A620055F6D
+	for <test2_isa@centrum.sk>; Sun, 17 Oct 2021 19:06:26 +0200 (CEST)
+Received: by mail1012.cent (Postfix, from userid 33)
+	id 4185E6010E303; Sun, 17 Oct 2021 19:06:26 +0200 (CEST)
+To: <test2_isa@centrum.sk>
+Subject: =?utf-8?q?AHOJ_KOKOTY?=
+Received: from 80.242.33.193
+	by mail1012.centrum.cz (centrum.cz multimail) with HTTP
+Date: Sun, 17 Oct 2021 19:06:26 +0200
+From: KOKOT IUSA <test2_isa@centrum.sk>
+X-Mailer: Centrum Email 5.3
+X-Priority: 3
+X-Original-From: =?utf-8?q?KOKOT_IUSA?= <test2_isa@centrum.sk>
+MIME-Version: 1.0
+Message-Id: <20211017190626.0BF4FD8D@centrum.sk>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+
+JEBEUL SEM TI MATKU

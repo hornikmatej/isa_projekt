@@ -1,0 +1,18 @@
+Return-Path: test1@mail.local
+Received: from [127.0.0.1] (mail.local [127.0.0.1])
+	by DESKTOP-14LSVQS with ESMTPA
+	; Sun, 17 Oct 2021 18:56:28 +0200
+Message-ID: <be5db0d7-cf87-98ad-8fcb-21067fb96695@mail.local>
+Date: Sun, 17 Oct 2021 18:56:28 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Content-Language: sk
+To: test2@mail.local
+From: Prvy ucet <test1@mail.local>
+Subject: PRVY MAILIK
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+
+AHOJ JEBEK
+

@@ -1,0 +1,191 @@
+Delivered-To: test2_isa@centrum.sk
+Received: from gmmr-2.centrum.cz (unknown [10.255.254.10])
+	by gmmr3.centrum.cz (Postfix) with ESMTP id 6DA661800AB5F
+	for <test2_isa@centrum.sk>; Mon, 18 Oct 2021 12:00:05 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=centrum.sk; s=mail;
+	t=1634551205; bh=CxcyrJ/OJrQn3htiLYHgY8jBA+XHS66olOo475mitvA=;
+	h=To:Subject:Date:From:From;
+	b=aK1MtFFcj0WNEHDKJqPrdhdk4Y+uas90v2hznC8/kgQM0MMKykDdYGu/3rs1be48Q
+	 UH9ii+j6JQhUAXmPmAiS91yKlSQloaw38nIl3yx50F68sCTJdomN4DyQJPc0QdZeHC
+	 bQk3HCj/2JKyqEeX99sV4c6Evgh2JgQmRE94u9e0=
+Received: from vm1.excello.cz (vm1.excello.cz [5.180.49.60])
+	by gmmr-2.centrum.cz (Postfix) with QMQP id 69EBB77DF
+	for <test2_isa@centrum.sk>; Mon, 18 Oct 2021 12:00:05 +0200 (CEST)
+Received: from vm1.excello.cz by vm1.excello.cz
+ (VF-Scanner: Clear:RC:0(2a00:da80:0:502::8):SC:0(2.5/5.0):CC:0:;
+ processed in 0.4 s); 18 Oct 2021 10:00:05 +0000
+X-VF-Scanner-ID: 20211018100005.039972.26728.vm1.excello.cz.0
+X-Spam-Status: No, hits=2.5, required=5.0
+Received: from gmmr-3.centrum.cz (2a00:da80:0:502::8)
+  by out2.virusfree.cz with ESMTPS (TLSv1.3, TLS_AES_256_GCM_SHA384); 18 Oct 2021 12:00:05 +0200
+Received: from mail1012.cent (unknown [10.255.254.32])
+	by gmmr-3.centrum.cz (Postfix) with ESMTP id E73872005B28D
+	for <test2_isa@centrum.sk>; Mon, 18 Oct 2021 12:00:04 +0200 (CEST)
+Received: by mail1012.cent (Postfix, from userid 33)
+	id D8A666010E303; Mon, 18 Oct 2021 12:00:04 +0200 (CEST)
+To: <test2_isa@centrum.sk>
+Subject: =?utf-8?q?druhy_mail_kopkotkokok?=
+Received: from 80.242.33.193
+	by mail1012.centrum.cz (centrum.cz multimail) with HTTP
+Date: Mon, 18 Oct 2021 12:00:04 +0200
+From: KOKOT IUSA <test2_isa@centrum.sk>
+X-Mailer: Centrum Email 5.3
+X-Priority: 3
+X-Original-From: =?utf-8?q?KOKOT_IUSA?= <test2_isa@centrum.sk>
+MIME-Version: 1.0
+Message-Id: <20211018120004.4B891AFB@centrum.sk>
+Content-Type: multipart/mixed;
+	boundary="_ca29_-------0a77f6c89b363a324836388765b80371"
+
+This is a multi-part message in MIME format.
+
+--_ca29_-------0a77f6c89b363a324836388765b80371
+Content-Type: multipart/alternative;
+	boundary="_d32c_-------d8d3b5646bff8b819ebd0ec78501667d"
+
+--_d32c_-------d8d3b5646bff8b819ebd0ec78501667d
+Content-Type: text/plain; charset=US-ASCII; format=flowed
+Content-Transfer-Encoding: 7bit
+
+copy pasta 123copy pasta 123copy pasta 123copy pasta 123copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+copy pasta 123
+
+
+
+
+
+--_d32c_-------d8d3b5646bff8b819ebd0ec78501667d
+Content-Type: text/html; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+
+<p style="padding:0 0 0 0; margin:0 0 0 0;"><span style="font-size: 13.3333px;">copy pasta 123</span><span style="font-size: 13.3333px;">copy pasta 123</span><span style="font-size: 13.3333px;">copy pasta 123</span><span style="font-size: 13.3333px;">copy pasta 123</span><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+<p style="padding:0 0 0 0; margin:0 0 0 0;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div>
+<p style="font-size: 13.3333px;"><span style="font-size: 13.3333px;">copy pasta 123</span></p>
+
+</div>
+<div><span style="font-size: 13.3333px;"><br />
+</span></div>
+<p style="padding:0 0 0 0; margin:0 0 0 0;"><span style="font-size: 13.3333px;"><br />
+</span></p>
+
+
+--_d32c_-------d8d3b5646bff8b819ebd0ec78501667d--
+
+--_ca29_-------0a77f6c89b363a324836388765b80371--

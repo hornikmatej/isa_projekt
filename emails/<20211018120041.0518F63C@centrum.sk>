@@ -1,0 +1,68 @@
+Delivered-To: test2_isa@centrum.sk
+Received: from gmmr-1.centrum.cz (unknown [10.255.254.10])
+	by gmmr3.centrum.cz (Postfix) with ESMTP id 16F701800AC24
+	for <test2_isa@centrum.sk>; Mon, 18 Oct 2021 12:00:42 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=centrum.sk; s=mail;
+	t=1634551242; bh=cO2c+nAtPoFzdfNaDz/QrxPOQ3GksL4BKbxc4ob9S0I=;
+	h=To:Subject:Date:From:From;
+	b=XSibCUFhFnRXZjtPqntD03SXX7eJR74Jrpcw3+jtRolf6GVujEY9RAYTl76AdCv3z
+	 JSSq3TpwjwOiqUCCCGjshS57TrjWMC3kKH/Cw41HFnjYWET+ZJMHwZhFDaODv0IZqm
+	 UHEUMyOZh+Mk2kVyfIs9UgqFn4lmO/LF8HkKaNvY=
+Received: from vm1.excello.cz (vm1.excello.cz [IPv6:2001:67c:1591::3])
+	by gmmr-1.centrum.cz (Postfix) with QMQP id 13DC23000B74F
+	for <test2_isa@centrum.sk>; Mon, 18 Oct 2021 12:00:42 +0200 (CEST)
+Received: from vm1.excello.cz by vm1.excello.cz
+ (VF-Scanner: Clear:RC:0(2a00:da80:1:502::7):SC:0(1.5/5.0):CC:0:;
+ processed in 0.2 s); 18 Oct 2021 10:00:42 +0000
+X-VF-Scanner-ID: 20211018100041.855302.32470.vm1.excello.cz.0
+X-Spam-Status: No, hits=1.5, required=5.0
+Received: from gmmr-2.centrum.cz (2a00:da80:1:502::7)
+  by out2.virusfree.cz with ESMTPS (TLSv1.3, TLS_AES_256_GCM_SHA384); 18 Oct 2021 12:00:41 +0200
+Received: from mail1003.cent (unknown [10.255.254.12])
+	by gmmr-2.centrum.cz (Postfix) with ESMTP id BA4CA20055F6E
+	for <test2_isa@centrum.sk>; Mon, 18 Oct 2021 12:00:41 +0200 (CEST)
+Received: by mail1003.cent (Postfix, from userid 33)
+	id B29CA2004B297; Mon, 18 Oct 2021 12:00:41 +0200 (CEST)
+To: <test2_isa@centrum.sk>
+Subject: =?utf-8?q?ahoj_po_3=2E?=
+Received: from 80.242.33.193
+	by mail1003.centrum.cz (centrum.cz multimail) with HTTP
+Date: Mon, 18 Oct 2021 12:00:41 +0200
+From: KOKOT IUSA <test2_isa@centrum.sk>
+X-Mailer: Centrum Email 5.3
+X-Priority: 3
+X-Original-From: =?utf-8?q?KOKOT_IUSA?= <test2_isa@centrum.sk>
+MIME-Version: 1.0
+Message-Id: <20211018120041.0518F63C@centrum.sk>
+Content-Type: multipart/mixed;
+	boundary="_ca29_-------5cb6ff48d14fc0703e4440d5fa780d4d"
+
+This is a multi-part message in MIME format.
+
+--_ca29_-------5cb6ff48d14fc0703e4440d5fa780d4d
+Content-Type: multipart/alternative;
+	boundary="_d32c_-------0701ed224990187596f84498dcf0e476"
+
+--_d32c_-------0701ed224990187596f84498dcf0e476
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+
+NO COOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+DIVOCACI VPRED=C2=A0
+
+
+--_d32c_-------0701ed224990187596f84498dcf0e476
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<p style=3D"padding:0 0 0 0; margin:0 0 0 0;">NO COOOOOOOOOOOOOOOOOOOOOOOOO=
+OOOOOOOOOOOOOOOOOOOOOOOOOOOO</p>
+
+<p style=3D"padding:0 0 0 0; margin:0 0 0 0;">DIVOCACI VPRED&nbsp;<img src=
+=3D"https://i0.cz/6/gm/emotions/smiley-cool.gif" border=3D"0" alt=3D"&Uacut=
+e;=C5=BEasn&yacute;" title=3D"&Uacute;=C5=BEasn&yacute;" /></p>
+
+
+--_d32c_-------0701ed224990187596f84498dcf0e476--
+
+--_ca29_-------5cb6ff48d14fc0703e4440d5fa780d4d--

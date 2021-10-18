@@ -135,6 +135,9 @@ void parse_arguments(int argc, char **argv){
             exit(1);
         }
         cfg.outdir = std::string(outdir);
+        if (cfg.outdir.back() != '/'){
+                cfg.outdir += "/";
+            }
     }
 
     if(cmdOptionExists(argv, argv + argc, "-d")){
@@ -144,23 +147,23 @@ void parse_arguments(int argc, char **argv){
         cfg.new_mails = true;
     }
 
-    if(cmdOptionExists(argv, argv + argc, "-p")){
-        char * port = getCmdOption(argv, argv + argc, "-p", false);
-        if (port){
-            printf("port -> %s\n", port);
-            try {
-                // nastavenia cisla portu ak bolo zadane
-                cfg.port = std::stoi(std::string(port));
-                if (cfg.port < 0 || cfg.port >  65535) {
-                    fprintf(stderr, "Cislo portu je zle zadane\n");
-                    exit(1);
-                }
-            } catch (std::exception const&) {
-                fprintf(stderr, "Cislo portu je zle zadane\n");
-                exit(1);
-            }
-        }
-    }
+    // if(cmdOptionExists(argv, argv + argc, "-p")){
+    //     char * port = getCmdOption(argv, argv + argc, "-p", false);
+    //     if (port){
+    //         printf("port -> %s\n", port);
+    //         try {
+    //             // nastavenia cisla portu ak bolo zadane
+    //             cfg.port = std::stoi(std::string(port));
+    //             if (cfg.port < 0 || cfg.port >  65535) {
+    //                 fprintf(stderr, "Cislo portu je zle zadane\n");
+    //                 exit(1);
+    //             }
+    //         } catch (std::exception const&) {
+    //             fprintf(stderr, "Cislo portu je zle zadane\n");
+    //             exit(1);
+    //         }
+    //     }
+    // }
     
 
     if(cmdOptionExists(argv, argv + argc, "-T")){
@@ -169,6 +172,7 @@ void parse_arguments(int argc, char **argv){
             exit(1);
         }
         cfg.T_enc = true;
+        cfg.port = 995;
     }
     if(cmdOptionExists(argv, argv + argc, "-S")){
         if (cmdOptionExists(argv, argv + argc, "-T")){
@@ -211,9 +215,32 @@ void parse_arguments(int argc, char **argv){
                 fprintf(stderr, "Zadany adresar s certifikaty neexistuje\n");
                 exit(1);
             }
+            
             cfg.certdir = std::string(certdir);
+            if (cfg.certdir.back() != '/'){
+                cfg.certdir += "/";
+            }
         }
     }
+
+    if(cmdOptionExists(argv, argv + argc, "-p")){
+        char * port = getCmdOption(argv, argv + argc, "-p", false);
+        if (port){
+            printf("port -> %s\n", port);
+            try {
+                // nastavenia cisla portu ak bolo zadane
+                cfg.port = std::stoi(std::string(port));
+                if (cfg.port < 0 || cfg.port >  65535) {
+                    fprintf(stderr, "Cislo portu je zle zadane\n");
+                    exit(1);
+                }
+            } catch (std::exception const&) {
+                fprintf(stderr, "Cislo portu je zle zadane\n");
+                exit(1);
+            }
+        }
+    }
+
     std::string tmp;
     for (int i = 2; i < argc; i++){
         tmp = std::string(argv[i]);
@@ -279,19 +306,37 @@ BIO *create_connection(std::string server, int port){
     return new_bio;
 }
 
+void create_sec_connection(BIO * bio, std::string server, int port){
+    std::string hostname = server + ":"+std::to_string(port);
+    char* host_name = const_cast<char*>(hostname.c_str());
+
+    BIO_set_conn_hostname(bio, host_name);
+
+    if(BIO_do_connect(bio) <= 0){
+        fprintf(stderr, "Nepodarilo sa pripojit k serveru(SSL)\n");
+        exit(1);
+    }
+}
+
 void authentificate(std::string uname, std::string pass){
     try{
         send_command("USER " + uname);
         std::string resp = get_response();
-        std::cout << resp << std::endl;
 
         send_command("PASS " + pass);
         resp = get_response();
     }
     catch (MyException e){
-        std::cerr << e.str_what;
+        std::cerr << e.str_what << std::endl;
         exit(1);
     }
+}
+
+void save_email(std::string email, std::string filename){
+    std::ofstream MyFile(cfg.outdir + filename);
+    MyFile << email;
+    MyFile.close();
+
 }
 
 std::string download_email(BIO * bio, int i){
@@ -328,10 +373,11 @@ std::string download_email(BIO * bio, int i){
         }
     }
     resp.erase(resp.length()-3, resp.length());
+    resp.erase(0, resp.find("\r\n") + 2);
     return resp;
 }
 
-void download_all_emails(BIO *bio){
+void download_all_emails(BIO *bio, bool new_mails){
     //pocet emailov
     send_command("STAT");
     std::string resp;
@@ -349,6 +395,7 @@ void download_all_emails(BIO *bio){
     int n_emails = std::stoi(match.str(2));
 
     std::string email;
+    int c_nm = 0;
 
     for (int i = 1; i <= n_emails; i++){
         try {
@@ -359,11 +406,32 @@ void download_all_emails(BIO *bio){
             exit(1);
         }
         // vypisat kolko emailov sa stiahlo ak to zliha pri stahovani
+        // ked zada adresar bez / na konci FIX
 
-        // "(^Message-ID: )(.+)$" pre ulozenie 
-        std::cout << "==========================================================" << std::endl;
-        std::cout << email << std::endl;
-    }   
+        std::regex mid("([Mm][Ee][Ss][Ss][Aa][Gg][Ee]-[Ii][Dd]: )(.+)");
+        std::smatch mat;
+        regex_search(email, mat, mid);
+
+        if (new_mails){
+            std::ifstream ifile;
+            ifile.open(cfg.outdir + mat.str(2));
+            if(!ifile) {
+                save_email(email, mat.str(2));
+                c_nm++;
+            }
+            else {
+                ifile.close();
+            }
+        }else {
+            save_email(email, mat.str(2));
+        }
+    }
+    if (new_mails){
+        std::cout << "Staženy " + std::to_string(c_nm) + " nových zpráv\n";
+    }else {
+        std::cout << "Staženy " + std::to_string(n_emails) + " zprávy\n";
+    }
+
 }
 
 void delete_emails(BIO *bio){
@@ -393,15 +461,57 @@ void delete_emails(BIO *bio){
         }
         std::cout << resp << std::endl;
     }
+    std::cout << "Zmazaných " + std::to_string(n_emails) + " zpráv\n";
 }
 
 
 
 
-void pop3session(){
-    cfg.bio = create_connection(cfg.server, cfg.port);
+void pop3session(bool secure, SSL * ssl){
+
     std::string resp;
 
+    if (secure){
+        create_sec_connection(cfg.bio, cfg.server, cfg.port);
+        try {
+            resp = get_response();
+        }
+        catch (MyException e){
+            std::cerr << e.str_what;
+            exit(1);
+        }
+
+        if(SSL_get_verify_result(ssl) != X509_V_OK){
+            fprintf(stderr, "Nepodarilo sa overit certifikat\n");
+            exit(1);
+        }
+    }
+    else{
+        cfg.bio = create_connection(cfg.server, cfg.port);
+        try {
+            resp = get_response();
+        }
+        catch (MyException e){
+            std::cerr << e.str_what;
+            exit(1);
+        }
+    }
+
+    authentificate(cfg.username, cfg.password);
+
+    if (cfg.del_mails){
+        delete_emails(cfg.bio);
+    }
+    else if (cfg.new_mails){
+        download_all_emails(cfg.bio, true);
+    }
+    else {
+        download_all_emails(cfg.bio, false);
+    }
+
+
+    //quit
+    send_command("QUIT");
     try {
         resp = get_response();
     }
@@ -410,19 +520,33 @@ void pop3session(){
         exit(1);
     }
 
-    authentificate(cfg.username, cfg.password);
-
-    if (cfg.new_mails){
-
-    }
-    else if (cfg.del_mails){
-        delete_emails(cfg.bio);
-    }
-    else {
-        download_all_emails(cfg.bio);
-    }
     
     BIO_free_all(cfg.bio);
+}
+
+BIO * set_sec_conn(SSL_CTX * ctx){
+    if (!cfg.certfile.empty()){
+            char* path = const_cast<char*>(cfg.certfile.c_str());
+            if(! SSL_CTX_load_verify_locations(ctx, path, NULL)){
+                std::cerr << "Nepodarilo sa nacitat certifikat" << std::endl;
+                exit(1);
+            }
+        }
+
+        if (!cfg.certdir.empty()){
+            char* path = const_cast<char*>(cfg.certdir.c_str());
+            if(! SSL_CTX_load_verify_locations(ctx, NULL, path)){
+                std::cerr << "Nepodarilo sa nacitat adresar s certifikaty" << std::endl;
+                exit(1);
+            }
+        }
+
+        if (cfg.certfile.empty() && cfg.certdir.empty()){
+            SSL_CTX_set_default_verify_paths(ctx);
+        }
+
+        BIO * bio = BIO_new_ssl_connect(ctx);
+        return bio;
 }
 
 
@@ -433,12 +557,20 @@ int main(int argc, char **argv){
     SSL_load_error_strings();
     OpenSSL_add_all_algorithms();
 
-    std::ofstream MyFile(cfg.outdir + "filename.txt");
-    MyFile << "Files can be tricky, but it is fun enough!";
-    MyFile.close();
+    if (cfg.T_enc){
+        SSL_CTX * ctx = SSL_CTX_new(SSLv23_client_method());
+        SSL * ssl;
+        cfg.bio = set_sec_conn(ctx);
+        BIO_get_ssl(cfg.bio, & ssl);
+        SSL_set_mode(ssl, SSL_MODE_AUTO_RETRY);
 
+        pop3session(true, ssl);
 
-    pop3session();
+        SSL_CTX_free(ctx);
+    }
+    else{
+        pop3session(false, NULL);
+    }
 
     return 0;
 }
