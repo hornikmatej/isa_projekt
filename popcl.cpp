@@ -467,7 +467,7 @@ void delete_emails(BIO *bio){
 
 
 
-void pop3session(bool secure, SSL * ssl){
+void pop3session(bool secure, SSL * ssl, SSL_CTX * ctx){
 
     std::string resp;
 
@@ -493,6 +493,34 @@ void pop3session(bool secure, SSL * ssl){
         }
         catch (MyException e){
             std::cerr << e.str_what;
+            exit(1);
+        }
+    }
+
+    if (cfg.S_enc){
+        send_command("STLS");
+        try {
+            resp = get_response();
+        }
+        catch (MyException e){
+            std::cerr << e.str_what;
+            exit(1);
+        }
+        BIO *ret = NULL, *ssl_bio = NULL;
+        if ((ssl_bio = BIO_new_ssl(ctx, 1)) == NULL){
+            fprintf(stderr, "ERROR: pri -S\n");
+            exit(1);
+        }
+        if ((ret = BIO_push(ssl_bio, cfg.bio)) == NULL){
+            fprintf(stderr, "ERROR: pri -S\n");
+            exit(1);
+        }
+        cfg.bio = ret;
+        BIO_get_ssl(cfg.bio, & ssl);
+        SSL_set_mode(ssl, SSL_MODE_AUTO_RETRY);
+
+        if(SSL_get_verify_result(ssl) != X509_V_OK){
+            fprintf(stderr, "Nepodarilo sa overit certifikat\n");
             exit(1);
         }
     }
@@ -524,29 +552,31 @@ void pop3session(bool secure, SSL * ssl){
     BIO_free_all(cfg.bio);
 }
 
-BIO * set_sec_conn(SSL_CTX * ctx){
+BIO * set_sec_conn(SSL_CTX * ctx, bool S_enc){
     if (!cfg.certfile.empty()){
             char* path = const_cast<char*>(cfg.certfile.c_str());
             if(! SSL_CTX_load_verify_locations(ctx, path, NULL)){
                 std::cerr << "Nepodarilo sa nacitat certifikat" << std::endl;
                 exit(1);
             }
-        }
+    }
 
-        if (!cfg.certdir.empty()){
-            char* path = const_cast<char*>(cfg.certdir.c_str());
-            if(! SSL_CTX_load_verify_locations(ctx, NULL, path)){
-                std::cerr << "Nepodarilo sa nacitat adresar s certifikaty" << std::endl;
-                exit(1);
-            }
+    if (!cfg.certdir.empty()){
+        char* path = const_cast<char*>(cfg.certdir.c_str());
+        if(! SSL_CTX_load_verify_locations(ctx, NULL, path)){
+            std::cerr << "Nepodarilo sa nacitat adresar s certifikaty" << std::endl;
+            exit(1);
         }
+    }
 
-        if (cfg.certfile.empty() && cfg.certdir.empty()){
-            SSL_CTX_set_default_verify_paths(ctx);
-        }
-
-        BIO * bio = BIO_new_ssl_connect(ctx);
-        return bio;
+    if (cfg.certfile.empty() && cfg.certdir.empty()){
+        SSL_CTX_set_default_verify_paths(ctx);
+    }
+    if (S_enc){
+        return NULL;
+    }
+    BIO * bio = BIO_new_ssl_connect(ctx);
+    return bio;
 }
 
 
@@ -557,19 +587,24 @@ int main(int argc, char **argv){
     SSL_load_error_strings();
     OpenSSL_add_all_algorithms();
 
-    if (cfg.T_enc){
+    if (cfg.T_enc || cfg.S_enc){
         SSL_CTX * ctx = SSL_CTX_new(SSLv23_client_method());
         SSL * ssl;
-        cfg.bio = set_sec_conn(ctx);
-        BIO_get_ssl(cfg.bio, & ssl);
-        SSL_set_mode(ssl, SSL_MODE_AUTO_RETRY);
-
-        pop3session(true, ssl);
+        if (cfg.T_enc){
+            cfg.bio = set_sec_conn(ctx,false);
+            BIO_get_ssl(cfg.bio, & ssl);
+            SSL_set_mode(ssl, SSL_MODE_AUTO_RETRY);
+            pop3session(true, ssl, NULL);
+        }
+        else {
+            cfg.bio = set_sec_conn(ctx,true);
+            pop3session(false, ssl, ctx);
+        }
 
         SSL_CTX_free(ctx);
     }
     else{
-        pop3session(false, NULL);
+        pop3session(false, NULL, NULL);
     }
 
     return 0;
