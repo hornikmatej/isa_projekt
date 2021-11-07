@@ -635,6 +635,11 @@ BIO * set_sec_conn(SSL_CTX * ctx, bool S_enc){
     //kontrola zlozky certifikatov zadaneho s -C
     if (!cfg.certdir.empty()){
         char* path = const_cast<char*>(cfg.certdir.c_str());
+        //pripravenie zlozky
+        std::string cmd = "c_rehash " + cfg.certdir + " > /dev/null";
+        char * command = const_cast<char*>(cmd.c_str());
+        system(command);
+        
         if(! SSL_CTX_load_verify_locations(ctx, NULL, path)){
             std::cerr << "ERROR: Nepodarilo sa nacitat adresar s certifikaty" << std::endl;
             exit(1);
