@@ -12,7 +12,7 @@
 #include <regex>
 #include <cstdio>
 #include <cstring>
-#include <filesystem>
+#include <sys/stat.h>
 #include <unistd.h>
 #include <chrono>
 #include <thread>
@@ -155,8 +155,9 @@ void parse_arguments(int argc, char **argv){
     //kontrola ci existuje argument -o
     char * outdir = getCmdOption(argv, argv + argc, "-o", true);
     if (outdir){
-        if(!std::filesystem::is_directory(std::filesystem::status(outdir))){
-            fprintf(stderr, "ERROR: Zadany adresar pre emaily neexistuje\n");
+        struct stat buffer;
+        if (stat(outdir, &buffer) != 0) {
+    	    fprintf(stderr, "ERROR: Zadany adresar pre emaily neexistuje\n");
             exit(1);
         }
         cfg.outdir = std::string(outdir);
@@ -217,11 +218,12 @@ void parse_arguments(int argc, char **argv){
         char * certdir = getCmdOption(argv, argv + argc, "-C", false);
         //kontrola existencie adresara
         if (certdir){
-            if(!std::filesystem::is_directory(std::filesystem::status(certdir))){
-                fprintf(stderr, "ERROR: Zadany adresar s certifikaty neexistuje\n");
+
+            struct stat buffer;
+            if (stat(certdir, &buffer) != 0) {
+                fprintf(stderr, "ERROR: Zadany adresar pre emaily neexistuje\n");
                 exit(1);
             }
-            
             cfg.certdir = std::string(certdir);
             if (cfg.certdir.back() != '/'){
                 cfg.certdir += "/";
@@ -661,9 +663,10 @@ int main(int argc, char **argv){
 
     parse_arguments(argc, argv);
     //nastavnie openssl 
+    SSL_library_init();
     SSL_load_error_strings();
     OpenSSL_add_all_algorithms();
-
+    ERR_load_BIO_strings();
     if (cfg.T_enc || cfg.S_enc){
         //vytvorenie potrebnych struktur pre sifrovanu komunikaciu
         SSL_CTX * ctx = SSL_CTX_new(SSLv23_client_method());
